@@ -1,0 +1,4 @@
+name: WiSeConnect
+build:
+  cmake: zephyr
+  kconfig: zephyr/Kconfig
