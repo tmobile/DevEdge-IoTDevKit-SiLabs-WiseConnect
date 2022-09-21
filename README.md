@@ -1,1 +1,1 @@
-# DevEdge-IoTDevKit-SiLabs-WiseConnect
+
