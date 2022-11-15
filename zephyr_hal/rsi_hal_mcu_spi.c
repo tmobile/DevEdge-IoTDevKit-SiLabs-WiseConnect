@@ -31,10 +31,10 @@
  */
 
 #include "rsi_driver.h"
-#include <device.h>
-#include <devicetree.h>
-#include <drivers/spi.h>
-#include <sys/printk.h>
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
+#include <zephyr/drivers/spi.h>
+#include <zephyr/sys/printk.h>
 
 #define DT_DRV_COMPAT silabs_rs9116w
 

@@ -31,8 +31,8 @@
 
 #include <rsi_driver.h>
 #ifdef RSI_WITH_OS
-#include <zephyr.h>
-#include <sys/printk.h>
+#include <zephyr/kernel.h>
+#include <zephyr/sys/printk.h>
 #include "rsi_wlan_non_rom.h"
 
 K_SEM_DEFINE(sem_mgmt, 1, 1);
