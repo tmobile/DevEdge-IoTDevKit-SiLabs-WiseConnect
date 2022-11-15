@@ -29,14 +29,13 @@
  * Includes
  */
 #include "rsi_driver.h"
-#include <drivers/gpio.h>
-#include <device.h>
-#include <devicetree.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
 
 #define DT_DRV_COMPAT silabs_rs9116w
 
-#define INT_PIN DT_INST_GPIO_PIN(0, int_gpios)
-#define INT_PORT device_get_binding(DT_INST_GPIO_LABEL(0, int_gpios))
+static const struct gpio_dt_spec int_gpio = GPIO_DT_SPEC_INST_GET(0, int_gpios);
 
 typedef void (* interrupt_callback_t)(void);
 
@@ -67,9 +66,10 @@ void rsi_hal_intr_config(void (* rsi_interrupt_handler)(void))
 	//! Configure interrupt pin/register in input mode and register the interrupt handler
 	callback = rsi_interrupt_handler;
 
-    gpio_pin_configure(INT_PORT, INT_PIN, GPIO_INPUT);
-    gpio_init_callback(&cb_data, int_callback, BIT(INT_PIN));
-	gpio_add_callback(INT_PORT, &cb_data);
+	gpio_pin_configure_dt(&int_gpio, GPIO_INPUT);
+
+	gpio_init_callback(&cb_data, int_callback, BIT(int_gpio.pin));
+	gpio_add_callback(int_gpio.port, &cb_data);
 
 	return;
 
@@ -89,7 +89,7 @@ void rsi_hal_intr_mask(void)
 {
  
 	//! Mask/Disable the interrupt 
-	gpio_pin_interrupt_configure(INT_PORT, INT_PIN, GPIO_INT_DISABLE);
+	gpio_pin_interrupt_configure_dt(&int_gpio, GPIO_INT_DISABLE);
 	return;
 
 }
@@ -108,7 +108,7 @@ void rsi_hal_intr_unmask(void)
 {
 	
 	//! Unmask/Enable the interrupt
-	gpio_pin_interrupt_configure(INT_PORT, INT_PIN, GPIO_INT_EDGE_RISING);
+	gpio_pin_interrupt_configure_dt(&int_gpio, GPIO_INT_EDGE_RISING);
 	return;
 
 }

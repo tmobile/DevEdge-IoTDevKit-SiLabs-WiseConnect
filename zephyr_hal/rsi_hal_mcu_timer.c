@@ -31,7 +31,7 @@
  */
 
 #include "rsi_driver.h"
-#include <zephyr.h>
+#include <zephyr/kernel.h>
 
 static volatile uint32_t 		_dwTickCount  ;		//systick cout variable
 

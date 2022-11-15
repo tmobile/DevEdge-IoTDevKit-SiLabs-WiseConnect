@@ -31,9 +31,9 @@
  */
 #include "rsi_driver.h"
 
-#include <device.h>
-#include <devicetree.h>
-#include <drivers/gpio.h>
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
+#include <zephyr/drivers/gpio.h>
 
 #define DT_DRV_COMPAT silabs_rs9116w
 

@@ -30,7 +30,7 @@
  * Includes
  */
 #include "rsi_driver.h"
-#include <random/rand32.h>
+#include <zephyr/random/rand32.h>
 
 /**
  * Global Variables
