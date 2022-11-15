@@ -58,7 +58,3 @@ The WiSeConnect SDK contains the following files and folders.
   |  +--ble_provisioning_apps  > Bluetooth provisioning apps for Android and Windows
   |  +--advanced_logging       > It is used for advanced logging
 ```
-
-# TERMS OF USE
-
-Access and use of this repository and any files, code, or information contained herein is subject to the terms and execution of the “Participation Agreement”
