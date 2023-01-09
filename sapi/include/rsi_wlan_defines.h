@@ -24,7 +24,7 @@
 #define RSI_WLAN_DEFINES_H
 
 #ifndef BIT
-#define BIT(a) ((uint32_t)1U << a)
+#define BIT(a) ((uint32_t)1U << (a))
 #endif
 
 #endif
