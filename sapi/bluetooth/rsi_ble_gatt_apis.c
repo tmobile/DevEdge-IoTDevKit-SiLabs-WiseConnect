@@ -1363,7 +1363,6 @@ int32_t rsi_ble_indicate_value(uint8_t *dev_addr, uint16_t handle, uint16_t data
 /** @} */
 /** @addtogroup BT-LOW-ENERGY4
  * * @{ */
-
 /*==============================================*/
 /**
  * @fn         int32_t rsi_ble_indicate_value_sync(uint8_t *dev_addr, uint16_t handle,
