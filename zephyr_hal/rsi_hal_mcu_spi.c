@@ -101,7 +101,7 @@ void cs_disable(void)
 int16_t rsi_spi_transfer(uint8_t *tx_buff, uint8_t *rx_buff, uint16_t transfer_length,uint8_t mode)
 {
     #ifdef RSI_SPI_INTERFACE
-    if(!spi_is_ready(&rs9116w_conf.spi)) {
+    if(!spi_is_ready_dt(&rs9116w_conf.spi)) {
         printk("spi bus %s not ready", rs9116w_conf.spi.bus->name);	
         return -ENODEV;
     }
