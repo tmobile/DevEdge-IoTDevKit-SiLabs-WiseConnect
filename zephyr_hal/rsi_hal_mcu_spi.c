@@ -49,13 +49,6 @@ static struct rs9116w_config rs9116w_conf = {
 /**
  * Global Variables
  */
-#ifdef RSI_SPI_INTERFACE
-
-
-const struct device * spi_dev = NULL;
-
-const static struct spi_config *spi_conf;
-#endif
 
 
 /*==================================================================*/
@@ -127,15 +120,3 @@ int16_t rsi_spi_transfer(uint8_t *tx_buff, uint8_t *rx_buff, uint16_t transfer_l
 
     #endif
 }
-
-#ifdef RSI_SPI_INTERFACE
-static int init(const struct device *dev){
-
-    spi_dev = rs9116w_conf.spi.bus;
-    spi_conf = &rs9116w_conf.spi.config;
-
-    return 0;
-}
-
-SYS_INIT(init, POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEVICE);
-#endif
