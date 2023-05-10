@@ -63,6 +63,10 @@ config WISECONNECT_IP_DUAL_MODE
     bool "Enable IP bypass alongside non-bypass mode"
     depends on WISECONNECT_IP_BYPASS_MODE
 
+config WISECONNECT_BGSCAN
+    bool "Enable background scan/scans whilst connected"
+    default y
+
 endif # WISECONNECT_WIFI
 
 if WISECONNECT_BT
