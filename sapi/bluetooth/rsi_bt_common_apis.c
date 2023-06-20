@@ -61,7 +61,7 @@ int32_t rsi_bt_set_bd_addr(uint8_t *dev_addr)
  *             Non-Zero Value	-	Failure
  * @note       Refer Error Codes section for above error codes \ref error-codes .
  */
-int32_t rsi_bt_ber_enable_or_disable(struct rsi_bt_ber_cmd_s *ber_cmd)
+int32_t rsi_bt_ber_enable_or_disable(rsi_bt_ber_cmd_t *ber_cmd)
 {
   if (ber_cmd == NULL) {
     SL_PRINTF(SL_RSI_ERROR_INVALID_PARAMETER, BLUETOOTH, LOG_ERROR);
@@ -108,6 +108,7 @@ int32_t rsi_bt_set_local_name(uint8_t *local_name)
  * @param[in]  payload_len - Length of the payload.
  * @param[in]  payload     - Payload containing table data of gain table offset/max power
  * @param[in]  req_type    - update gain table request type (0 - max power update, 1 - offset update)
+ * @note       This API is applicable for High performance(HP) mode only.
  * @return     0		-	Success \n
  *             0x4F01		-	Invalid gain table payload length \n
  *             0x4F02		-	Invalid region. \n
@@ -297,7 +298,7 @@ int32_t rsi_bt_set_feature_bitmap(uint32_t feature_bit_map)
  *             Default tx power index for BT classic is 14 \n
  *                      1 - 31     0DBM Mode.  \n
  *                     33 - 63     10DBM Mode. \n
- *                     64 - 75     HP Mode.    \n
+ *                     64 - 79     HP Mode.    \n
  * @note       The default value will vary based on country region and board \n 
  * @return     0		-	Success \n
  *             Non-Zero Value	-	Failure
@@ -371,6 +372,7 @@ int32_t rsi_bt_power_save_profile(uint8_t psp_mode, uint8_t psp_type)
   return status;
 }
 /** @} */
+/*! \cond RS9116 */
 /** @addtogroup BT-CLASSIC5
 * @{
 */
@@ -536,6 +538,7 @@ int32_t rsi_bt_vendor_set_afh_classification_intervals(uint16_t afh_min, uint16_
 }
 
 /** @} */
+/*! \endcond */
 
 /**
  * @fn         int32_t rsi_memory_stats_enable(uint8_t protocol, uint8_t memory_stats_enable, uint32_t memory_stats_interval_ms)

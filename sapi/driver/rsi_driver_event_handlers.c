@@ -62,10 +62,10 @@ uint8_t rsi_get_intr_status(void);
 /*==============================================*/
 /**
  * @fn          void rsi_tx_event_handler(void)
- * @brief       Retrieve the packet from protocol TX pending queue
+ * @brief       Retrieve the packet from the TX pending queue and forward to the module.
  *              and forwards to the module.
  * @param[in]   void 
- * @return      void
+ * @return      Void
  *
  */
 
@@ -600,6 +600,10 @@ void rsi_tx_event_handler(void)
 #endif
     }
 
+#ifndef RSI_M4_INTERFACE
+    // signal semaphore incase of packet having async response
+    rsi_common_packet_transfer_done(pkt);
+#endif
     rsi_clear_event(RSI_TX_EVENT);
   }
 }
@@ -612,9 +616,9 @@ void rsi_tx_event_handler(void)
 /*==============================================*/
 /**
  * @fn         void rsi_rx_event_handler(void)
- * @brief      Read the packet from module and process RX packet.
+ * @brief      Read and process the RX packet from the module
  * @param[in]  void  
- * @return     void 
+ * @return     Void 
  *
  */
 

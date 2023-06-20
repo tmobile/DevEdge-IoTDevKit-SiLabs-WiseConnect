@@ -40,7 +40,7 @@
  * @brief       Set an event
  * @param[in]   global_cb_p - pointer to the common buffer
  * @param[in]   event_num   - event number to be set
- * @return      void
+ * @return      Void
  */
 ///@private
 void ROM_WL_rsi_set_event(global_cb_t *global_cb_p, uint32_t event_num)
@@ -80,7 +80,7 @@ void ROM_WL_rsi_set_event(global_cb_t *global_cb_p, uint32_t event_num)
  * @brief       Clear an event
  * @param[in]   global_cb_p  - pointer to the common buffer
  * @param[in]   event_num    - event number to clear
- * @return      void
+ * @return      Void
  */
 ///@private
 void ROM_WL_rsi_clear_event(global_cb_t *global_cb_p, uint32_t event_num)
@@ -106,7 +106,7 @@ void ROM_WL_rsi_clear_event(global_cb_t *global_cb_p, uint32_t event_num)
  * @brief       Mask an event
  * @param[in]   global_cb_p - pointer to the common buffer
  * @param[in]   event_num   - event number to mask
- * @return      void
+ * @return      Void
  */
 ///@private
 void ROM_WL_rsi_mask_event(global_cb_t *global_cb_p, uint32_t event_num)
@@ -131,7 +131,7 @@ void ROM_WL_rsi_mask_event(global_cb_t *global_cb_p, uint32_t event_num)
  * @brief       Unmask an event
  * @param[in]   global_cb_p - pointer to the common buffer
  * @param[in]   event_num   - event number to unmask
- * @return      void
+ * @return      Void
  */
 ///@private
 void ROM_WL_rsi_unmask_event(global_cb_t *global_cb_p, uint32_t event_num)
@@ -158,7 +158,7 @@ void ROM_WL_rsi_unmask_event(global_cb_t *global_cb_p, uint32_t event_num)
 /*====================================================*/
 /**
  * @fn          uint32_t ROM_WL_rsi_find_event(global_cb_t *global_cb_p, uint32_t event_map)
- * @brief       Find the event which is set from the map
+ * @brief       Find the event which is set
  * @param[in]   global_cb_p - pointer to the common buffer
  * @param[in]   event_map   - event map
  * @return      Event number
@@ -184,7 +184,7 @@ uint32_t ROM_WL_rsi_find_event(global_cb_t *global_cb_p, uint32_t event_map)
  * @param[in]   event_id          - event number which needs to be registered
  * @param[in]   event_handler_ptr - event handler which needs to be registered for a given event
  * @return      0 - Success \n
- *              1 - Error 
+ * @return      Non-Zero Value - Failure 
  */
 ///@private
 uint16_t ROM_WL_rsi_register_event(global_cb_t *global_cb_p, uint32_t event_id, void (*event_handler_ptr)(void))
@@ -211,7 +211,7 @@ uint16_t ROM_WL_rsi_register_event(global_cb_t *global_cb_p, uint32_t event_id, 
  * @brief       Set an event from ISR
  * @param[in]   global_cb_p - pointer to the common buffer
  * @param[in]   event_num   - event number to be set
- * @return      void
+ * @return      Void
  */
 ///@private
 void ROM_WL_rsi_set_event_from_isr(global_cb_t *global_cb_p, uint32_t event_num)
@@ -236,7 +236,7 @@ void ROM_WL_rsi_set_event_from_isr(global_cb_t *global_cb_p, uint32_t event_num)
  * @brief       Unmask an event from ISR
  * @param[in]   global_cb_p - pointer to the common buffer 
  * @param[in]   event_num - event number to unmask
- * @return      void
+ * @return      Void
  */
 ///@private
 void ROM_WL_rsi_unmask_event_from_isr(global_cb_t *global_cb_p, uint32_t event_num)

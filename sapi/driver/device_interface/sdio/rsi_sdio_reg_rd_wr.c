@@ -44,7 +44,11 @@
 * @{
 */
 /**
- *
+ * @brief       This API reads the content of the host interface register regAddr to the buffer dBuf
+ * @param[in]   regAddr    -  Host interface. 
+ * @param[in]   dBuf       -  Buffer.
+ * @return       0         -  Success \n
+ *             
  */
 int16_t rsi_reg_rd(uint8_t regAddr, uint8_t *dBuf)
 {
@@ -52,6 +56,11 @@ int16_t rsi_reg_rd(uint8_t regAddr, uint8_t *dBuf)
 }
 
 /**
+ * @brief       This API writes the content provided by dBuf to the host interface register regAddr
+ * @param[in]   regAddr    -  Destination address. 
+ * @param[in]   dBuf       -  Buffer with the content to be written to the register.
+ * @return       0         -  Success \n
+ *             
  */
 
 int16_t rsi_reg_wr(uint8_t regAddr, uint8_t *dBuf)

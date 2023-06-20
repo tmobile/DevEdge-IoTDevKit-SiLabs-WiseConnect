@@ -100,6 +100,30 @@
 
 // frame type of raw data packets for host stack
 #define DUAL_HOST_RAW_DATA_PACKET 1
+
+// AKM suite types
+#define RSN_SELECTOR(d, c, b, a) \
+  ((((uint32_t)(a)) << 24) | (((uint32_t)(b)) << 16) | (((uint32_t)(c)) << 8) | (uint32_t)(d))
+#define RSN_AKM_OFFSET                         12
+#define RSN_SELECTOR_LEN                       4
+#define WPA_DRIVER_CAPA_KEY_MGMT_WPA           0x00000001
+#define WPA_DRIVER_CAPA_KEY_MGMT_WPA2          0x00000002
+#define WPA_DRIVER_CAPA_KEY_MGMT_WPA_PSK       0x00000004
+#define WPA_DRIVER_CAPA_KEY_MGMT_WPA2_PSK      0x00000008
+#define WPA_DRIVER_CAPA_KEY_MGMT_WPA_NONE      0x00000010
+#define WPA_DRIVER_CAPA_KEY_MGMT_SAE           0x00010000
+#define WPA_DRIVER_CAPA_KEY_MGMT_802_1X_SHA256 0x00020000
+#define WPA_DRIVER_CAPA_KEY_MGMT_PSK_SHA256    0x00040000
+
+#define RSN_AUTH_KEY_MGMT_UNSPEC_802_1X   RSN_SELECTOR(0x00, 0x0f, 0xac, 1)
+#define RSN_AUTH_KEY_MGMT_PSK_OVER_802_1X RSN_SELECTOR(0x00, 0x0f, 0xac, 2)
+#define RSN_AUTH_KEY_MGMT_FT_802_1X       RSN_SELECTOR(0x00, 0x0f, 0xac, 3)
+#define RSN_AUTH_KEY_MGMT_FT_PSK          RSN_SELECTOR(0x00, 0x0f, 0xac, 4)
+#define RSN_AUTH_KEY_MGMT_802_1X_SHA256   RSN_SELECTOR(0x00, 0x0f, 0xac, 5)
+#define RSN_AUTH_KEY_MGMT_PSK_SHA256      RSN_SELECTOR(0x00, 0x0f, 0xac, 6)
+#define RSN_AUTH_KEY_MGMT_TPK_HANDSHAKE   RSN_SELECTOR(0x00, 0x0f, 0xac, 7)
+#define RSN_AUTH_KEY_MGMT_SAE             RSN_SELECTOR(0x00, 0x0f, 0xac, 8)
+
 /******************************************************
  * *                    Constants
  * ******************************************************/
@@ -202,6 +226,7 @@ typedef enum rsi_wlan_cmd_response_e {
   RSI_WLAN_RSP_CLIENT_DISCONNECTED   = 0xC3,
   RSI_WLAN_RSP_FREQ_OFFSET           = 0xF3,
   RSI_WLAN_RSP_CALIB_WRITE           = 0xCA,
+  RSI_WLAN_RSP_CALIB_READ            = 0xCF,
   RSI_WLAN_RSP_DYNAMIC_POOL          = 0xC7,
   RSI_WLAN_RSP_FILTER_BCAST_PACKETS  = 0xC9,
   RSI_WLAN_RSP_EMB_MQTT_CLIENT       = 0xCB,
@@ -238,7 +263,7 @@ typedef enum rsi_wlan_cmd_response_e {
   RSI_WLAN_RSP_HTTP_OTAF             = 0xF4,
   RSI_WLAN_RSP_UPDATE_TCP_WINDOW     = 0xF5,
   RSI_WLAN_RATE_RSP_STATS            = 0x88,
-  RSI_WLAN_RSP_GET_CSI_DATA          = 0xB9,
+  RSI_WLAN_RSP_GET_CSI_DATA          = 0xC4,
   RSI_WLAN_RSP_EXT_STATS             = 0x68
 
 } rsi_wlan_cmd_response_t;
@@ -313,6 +338,7 @@ typedef enum rsi_wlan_cmd_request_e {
   RSI_WLAN_REQ_SET_REGION_AP        = 0xBD,
   RSI_WLAN_REQ_FREQ_OFFSET          = 0xF3,
   RSI_WLAN_REQ_CALIB_WRITE          = 0xCA,
+  RSI_WLAN_REQ_CALIB_READ           = 0xCF,
   RSI_WLAN_REQ_DYNAMIC_POOL         = 0xC7,
   RSI_WLAN_REQ_FILTER_BCAST_PACKETS = 0xC9,
   RSI_WLAN_REQ_EMB_MQTT_CLIENT      = 0xCB,
@@ -338,7 +364,7 @@ typedef enum rsi_wlan_cmd_request_e {
   RSI_WLAN_REQ_HTTP_OTAF            = 0xF4,
   RSI_WLAN_REQ_UPDATE_TCP_WINDOW    = 0xF5,
   RSI_WLAN_REQ_11AX_PARAMS          = 0xFF,
-  RSI_WLAN_REQ_GET_CSI_DATA         = 0xB9,
+  RSI_WLAN_REQ_GET_CSI_DATA         = 0xC4,
   RSI_WLAN_REQ_EXT_STATS            = 0x68
 
 } rsi_wlan_cmd_request_t;
@@ -847,7 +873,7 @@ typedef struct rsi_req_cert_valid_s {
 
 } rsi_req_cert_valid_t;
 #endif
-#define RSI_CERT_MAX_DATA_SIZE (RSI_MAX_CERT_SEND_SIZE – (sizeof(struct rsi_cert_info_s)))
+#define RSI_CERT_MAX_DATA_SIZE (RSI_MAX_CERT_SEND_SIZE - (sizeof(struct rsi_cert_info_s)))
 // Set certificate command request structure
 typedef struct rsi_req_set_certificate_s {
   // certificate information structure
@@ -1729,9 +1755,8 @@ typedef struct rsi_calib_write_s {
 #define SW_XO_CTUNE_VALID    BIT(2)
 #define BURN_XO_FAST_DISABLE BIT(3)
   uint32_t flags;
-  int8_t gain_offset;
+  int8_t gain_offset[3];
   int8_t xo_ctune;
-  uint8_t reserved1[2];
 } rsi_calib_write_t;
 
 // csi config structure
@@ -1740,6 +1765,10 @@ typedef struct rsi_csi_config_s {
   uint32_t csi_enable;
   // periodicity of CSI data retrieval
   uint32_t periodicity;
+  // number of MAC addresses
+  uint32_t num_of_mac_addr;
+  // MAC addresses
+  uint8_t mac_addresses[1][6];
 } rsi_csi_config_t;
 
 /******************************************************
