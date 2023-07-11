@@ -540,7 +540,7 @@ uint64_t ip_to_reverse_hex(char *ip)
   uint64_t ip_hex;
   uint32_t status;
 
-  status = sscanf(ip, "%lu.%lu.%lu.%lu", &ip1, &ip2, &ip3, &ip4);
+  status = sscanf(ip, "%u.%u.%u.%u", &ip1, &ip2, &ip3, &ip4);
   if (status != 4) {
     return 0x00000000; // Problem if we actually pass 0.0.0.0
   }
