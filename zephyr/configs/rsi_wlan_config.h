@@ -104,8 +104,14 @@
 #define RSI_MULTIPROBE RSI_ENABLE
 #endif
 
+/* RSI_ENABLE or RSI_DISABLE rejoin parameters */
+#define RSI_REJOIN_PARAMS_SUPPORT RSI_ENABLE
+
+/* Rejoin retry count. If 0 retries infinitely times */
+#define RSI_REJOIN_MAX_RETRY 3
+
 #endif /** CONFIG_WISECONNECT_WIFI */
 
 #include "rsi_wlan_defines.h"
 #include "rsi_wlan_common_config.h"
-#endif 
+#endif
