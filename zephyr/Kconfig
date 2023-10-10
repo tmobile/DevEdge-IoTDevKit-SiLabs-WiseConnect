@@ -104,4 +104,16 @@ config WISECONNECT_BLE_MTU
     range 20 232
     default 232
 
+config WISECONNECT_ROAMING_SUPPORT
+    bool "Enable device to roam on mesh network"
+    default n
+
+config WISECONNECT_ROAMING_THRESHOLD
+    int "RSSI threshold that will cause switch (as possitive)"
+    depends on WISECONNECT_ROAMING_SUPPORT
+
+config WISECONNECT_ROAMING_HYSTERISIS
+    int "Roaming hysterisis value for switching"
+    depends on WISECONNECT_ROAMING_SUPPORT
+
 endif # BT_RS9116W
