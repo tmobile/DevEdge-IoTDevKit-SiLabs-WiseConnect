@@ -109,7 +109,7 @@ config WISECONNECT_ROAMING_SUPPORT
     default n
 
 config WISECONNECT_ROAMING_THRESHOLD
-    int "RSSI threshold that will cause switch (as possitive)"
+    int "RSSI threshold that will cause switch (as positive)"
     depends on WISECONNECT_ROAMING_SUPPORT
 
 config WISECONNECT_ROAMING_HYSTERISIS
