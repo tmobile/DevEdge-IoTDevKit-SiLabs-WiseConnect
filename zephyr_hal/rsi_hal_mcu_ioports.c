@@ -109,8 +109,8 @@ void rsi_hal_config_gpio(uint8_t gpio_number, uint8_t mode, uint8_t value)
 	} else {
 		pin_flags = GPIO_INPUT;
 	}
-  const struct gpio_dt_spec *gpio = get_gpio(gpio_number);
-	gpio_pin_configure(gpio->port, gpio->pin, pin_flags);
+    const struct gpio_dt_spec *gpio = get_gpio(gpio_number);
+	gpio_pin_configure_dt(gpio, pin_flags);
 
 	return;
 }
